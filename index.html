@@ -351,14 +351,27 @@
 
         function descargarExcel() {
             let db = JSON.parse(localStorage.getItem('AsistenciaDB')) || [];
-            if (!db.length) return alert("Sin datos");
+            if (!db.length) return alert("AVISO: No hay datos guardados para exportar todavía.");
+
+            // Armamos el CSV con punto y coma para Excel de Argentina
             let csv = "Fecha;Hora;Escuela;Curso;Alumno;Estado;Notas\n";
-            db.forEach(r => csv += `${r.f};${r.h};"${r.esc}";"${r.cur}";"${r.n}";"${r.e}";"${r.nt}"\n`);
+            db.forEach(r => {
+                csv += `${r.f};${r.h};"${r.esc}";"${r.cur}";"${r.n}";"${r.e}";"${r.nt}"\n`;
+            });
+
+            // Generamos la fecha para el nombre del archivo
+            const hoy = new Date().toLocaleDateString('es-AR').replace(/\//g, '-');
+            
+            // Creamos el archivo (Blob) con codificación para tildes y eñes
             let bl = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csv], { type: 'text/csv;charset=utf-8;' });
             let l = document.createElement("a");
             l.href = URL.createObjectURL(bl);
-            l.download = `Asis_${f.replace(/\//g, '-')}.csv`;
+            l.download = `Asistencia_Docente_${hoy}.csv`;
+            
+            // Forzamos el clic de descarga
+            document.body.appendChild(l);
             l.click();
+            document.body.removeChild(l);
         }
 
         function borrarTodaLaBase() {
@@ -369,6 +382,7 @@
     </script>
 </body>
 </html>
+
 
 
 
