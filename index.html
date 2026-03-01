@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Asistencia Docente Pro</title>
+    
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#32aded">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <link rel="icon" type="image/png" href="icono.png">
     <link rel="apple-touch-icon" href="icono.png">
-    
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#32aded">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Asistencia Docente</title>
+
     <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
     <style>
         :root {
-            /* Paleta de colores Celestes y Grises Claros (image_0.png) */
-            --ios-sky-blue: #32aded; /* El celeste eléctrico principal */
+            --ios-sky-blue: #32aded;
             --ios-sky-blue-hover: #1c94d4;
-            --ios-bg-body: #f1f8fe; /* Fondo celeste/blanco muy suave (cite: 1.1) */
-            --ios-container: rgba(255, 255, 255, 0.75); /* Cristal esmerilado (image_0.png) */
-            --ios-border: rgba(148, 163, 184, 0.2); /* Borde de cristal suave */
-            --ios-text-primary: #1c3d6c; /* Azul marino profundo corporativo */
-            --ios-text-secondary: #64748b; /* Gris para texto normal */
-            --ios-btn-bg: #e2e8f0; /* Fondo gris claro de botones */
+            --ios-bg-body: #f1f8fe;
+            --ios-container: rgba(255, 255, 255, 0.85);
+            --ios-border: rgba(148, 163, 184, 0.2);
+            --ios-text-primary: #1c3d6c;
+            --ios-text-secondary: #64748b;
+            --ios-btn-bg: #e2e8f0;
         }
 
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
             color: var(--ios-text-secondary);
-            /* Fondo celeste difuminado suave (image_0.png) */
             background: radial-gradient(circle at center, #ffffff 0%, #d4e8f9 100%);
             background-attachment: fixed;
             min-height: 100vh;
@@ -38,171 +40,111 @@
 
         .container {
             max-width: 650px;
-            margin: 30px auto;
-            padding: 30px;
-            /* Efecto Glassmorfismo: esmerilado y transparente (cite: 1.1) */
+            margin: 20px auto;
+            padding: 25px;
             background-color: var(--ios-container);
-            backdrop-filter: blur(12px);
-            border-radius: 24px; /* Súper redondeado iOS (cite: 1.1) */
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04); /* Sombra suave */
+            backdrop-filter: blur(15px);
+            border-radius: 28px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--ios-border);
             position: relative;
         }
 
-        /* Encabezado Nítido y Limpio (image_0.png) */
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 3px solid var(--ios-sky-blue);
         }
 
         .logo {
-            max-width: 180px;
+            max-width: 160px;
             height: auto;
         }
 
-        /* Botón de configuración (Engranaje) iOS */
         .btn-config {
             position: absolute;
-            top: 5px;
-            right: 0;
+            top: 10px;
+            right: 15px;
             background-color: #f1f5f9;
             border: 1px solid var(--ios-border);
             border-radius: 12px;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            transition: all 0.2s;
-            color: var(--ios-sky-blue);
             padding: 8px 12px;
             z-index: 1000;
         }
-        .btn-config:hover { background-color: var(--ios-border); }
 
         .filtros, .config-section {
             display: flex;
             flex-direction: column; 
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
         label {
             font-weight: 700;
             color: var(--ios-text-primary);
-            margin-bottom: -5px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         select, input[type="text"] {
             padding: 14px;
-            border-radius: 14px; /* Redondeado iOS (cite: 1.1) */
+            border-radius: 14px;
             border: 2px solid #eef2f6;
             font-size: 1rem;
-            background-color: #fdfdfd;
-            color: #2d3748;
+            background-color: #fff;
             width: 100%;
             box-sizing: border-box;
-            transition: all 0.2s;
-            -webkit-appearance: none; /* Quita el estilo nativo de select */
-            -moz-appearance: none;
-            appearance: none;
-        }
-        select:focus, input[type="text"]:focus {
-            border-color: var(--ios-sky-blue);
-            outline: none;
         }
 
-        /* Tarjeta de Alumno profesionalizada y suave */
         .alumno-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 18px; /* Súper redondeado (cite: 1.1) */
+            background: #fff;
+            border-radius: 20px;
             padding: 20px;
-            margin-bottom: 18px;
-            border: 1px solid #eef2f6;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-
-        .alumno-nombre {
-            font-size: 1.1rem;
-            font-weight: 700;
             margin-bottom: 15px;
-            color: var(--ios-text-primary);
+            border: 1px solid #eef2f6;
         }
 
-        /* Segmented Control iOS para Presente, Ausente, Tarde (image_0.png) */
         .botones-estado {
             display: flex;
             background-color: var(--ios-btn-bg);
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
-            margin-bottom: 15px;
-            border: 1px solid #e2e8f0;
+            margin-bottom: 10px;
         }
 
         .btn {
             flex: 1;
-            padding: 14px;
+            padding: 12px;
             border: none;
-            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
             background-color: transparent;
             color: #718096;
-            text-align: center;
         }
 
-        /* EL COLOR CELESTE DE iOS (image_0.png) */
         .btn.activo { 
             background-color: var(--ios-sky-blue); 
             color: white; 
-            box-shadow: 0 2px 4px rgba(0, 173, 237, 0.4);
         }
 
-        /* Botones de acción profesionalizados iOS (image_0.png) */
         .btn-accion {
             padding: 16px;
             border: none;
-            border-radius: 14px; /* Súper redondeado */
+            border-radius: 16px;
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             width: 100%;
-            transition: all 0.2s;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .btn-primario { background-color: var(--ios-sky-blue); color: white; }
-        .btn-primario:hover { background-color: var(--ios-sky-blue-hover); transform: translateY(-1px); }
-        
-        /* Botón secundario profesional azul marino */
         .btn-secundario { background-color: #1a3a5a; color: white; margin-top: 10px; }
-        .btn-secundario:hover { background-color: #112942; }
-
         .btn-peligro { background-color: #fed7d7; color: #9b2c2c; margin-top: 20px; }
-
-        .btn-chico { padding: 10px 20px; font-size: 0.85rem; width: auto; }
-
-        .config-titulo {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--ios-sky-blue);
-            border-left: 4px solid var(--ios-sky-blue);
-            padding-left: 10px;
-            margin: 20px 0 10px 0;
-        }
-
-        .config-alumno-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            border-bottom: 1px solid #edf2f7;
-            background: #fdfdfd;
-        }
     </style>
 </head>
 <body>
@@ -216,19 +158,14 @@
 
             <div class="filtros">
                 <label>Institución</label>
-                <select id="select-escuela" onchange="cargarCursos()">
-                    <option value="">Seleccionar...</option>
-                </select>
-
+                <select id="select-escuela" onchange="cargarCursos()"></select>
                 <label>Curso / División</label>
-                <select id="select-curso" onchange="cargarAlumnosAsistencia()" disabled>
-                    <option value="">Seleccionar...</option>
-                </select>
+                <select id="select-curso" onchange="cargarAlumnosAsistencia()" disabled></select>
             </div>
 
             <div id="lista-alumnos"></div>
 
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 25px;">
                 <button class="btn-accion btn-primario" onclick="guardarAsistencia()" style="display: none;" id="btn-guardar">Guardar Clase 💾</button>
                 <button class="btn-accion btn-secundario" onclick="descargarExcel()">Exportar a Excel 📊</button>
             </div>
@@ -237,211 +174,201 @@
         <div id="pantalla-config" style="display: none;">
             <div class="header">
                 <h2 style="color: var(--ios-text-primary); margin: 0;">Panel de Control IT</h2>
-                <button class="btn-accion btn-primario btn-chico" onclick="togglePantallas()">⬅️ Volver</button>
+                <button class="btn-accion btn-primario" style="padding:10px; width:auto; margin-top:10px;" onclick="togglePantallas()">⬅️ Volver</button>
             </div>
 
             <div class="config-section">
-                <div class="config-titulo">Paso 1: Agregar Escuelas (Instituciones)</div>
-                <input type="text" id="input-nueva-escuela" placeholder="Nombre de la Institución">
-                <button class="btn-accion btn-primario btn-chico" onclick="agregarEscuela()">+ Guardar</button>
+                <label>1. Agregar Escuelas</label>
+                <input type="text" id="input-nueva-escuela" placeholder="Nombre Institución">
+                <button class="btn-accion btn-primario" onclick="agregarEscuela()">+ Guardar</button>
             </div>
 
             <div class="config-section">
-                <div class="config-titulo">Paso 2: Agregar Cursos</div>
-                <select id="config-select-escuela" onchange="actualizarListasConfig()"><option value="">Elegir Escuela...</option></select>
+                <label>2. Agregar Cursos</label>
+                <select id="config-select-escuela" onchange="actualizarListasConfig()"></select>
                 <input type="text" id="input-nuevo-curso" placeholder="Ej: 1ro A">
-                <button class="btn-accion btn-primario btn-chico" onclick="agregarCurso()">+ Guardar</button>
+                <button class="btn-accion btn-primario" onclick="agregarCurso()">+ Guardar</button>
             </div>
 
             <div class="config-section">
-                <div class="config-titulo">Paso 3: Cargar Alumnos</div>
-                <select id="config-select-curso" onchange="mostrarAlumnosConfig()"><option value="">Elegir Curso...</option></select>
-                <input type="text" id="input-nuevo-alumno" placeholder="Apellido y Nombre" onkeypress="ingresarConEnter(event)">
-                <button class="btn-accion btn-primario btn-chico" onclick="agregarAlumno()">+ Agregar</button>
-                <div id="lista-config-alumnos" style="margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #edf2f7;"></div>
+                <label>3. Cargar Alumnos</label>
+                <select id="config-select-curso" onchange="mostrarAlumnosConfig()"></select>
+                <input type="text" id="input-nuevo-alumno" placeholder="Nombre Alumno" onkeypress="if(event.key==='Enter')agregarAlumno()">
+                <button class="btn-accion btn-primario" onclick="agregarAlumno()">+ Agregar</button>
+                <div id="lista-config-alumnos" style="margin-top:15px; border:1px solid #eee; border-radius:10px;"></div>
             </div>
 
-            <button class="btn-accion btn-peligro btn-chico" onclick="borrarTodaLaBase()">⚠️ Reiniciar Base de Datos</button>
+            <button class="btn-accion btn-peligro" onclick="borrarTodaLaBase()">⚠️ Reiniciar Todo</button>
         </div>
     </div>
 
     <script>
-        // ... (el JavaScript sigue siendo el mismo funcionalmente, pero lo integramos para que sea el archivo completo)
         let estructuraDB = JSON.parse(localStorage.getItem('EstructuraEscuelas_Pro_iOS')) || {};
 
         function togglePantallas() {
-            const pantallaAsistencia = document.getElementById("pantalla-asistencia");
-            const pantallaConfig = document.getElementById("pantalla-config");
-            if (pantallaAsistencia.style.display === "none") {
-                pantallaAsistencia.style.display = "block";
-                pantallaConfig.style.display = "none";
+            const asistencia = document.getElementById("pantalla-asistencia");
+            const config = document.getElementById("pantalla-config");
+            if (asistencia.style.display === "none") {
+                asistencia.style.display = "block";
+                config.style.display = "none";
                 cargarSelectEscuelasPrincipal(); 
             } else {
-                pantallaAsistencia.style.display = "none";
-                pantallaConfig.style.display = "block";
+                asistencia.style.display = "none";
+                config.style.display = "block";
                 actualizarListasConfig();
             }
         }
 
-        // Lógica Configuración
         function actualizarListasConfig() {
-            const selectEscuela = document.getElementById("config-select-escuela");
-            const valorActual = selectEscuela.value; 
-            selectEscuela.innerHTML = '<option value="">Elegir Escuela...</option>';
-            for (let escuela in estructuraDB) selectEscuela.innerHTML += `<option value="${escuela}">${escuela}</option>`;
-            selectEscuela.value = valorActual; 
+            const selEsc = document.getElementById("config-select-escuela");
+            const valEsc = selEsc.value;
+            selEsc.innerHTML = '<option value="">Elegir...</option>';
+            for (let e in estructuraDB) selEsc.innerHTML += `<option value="${e}">${e}</option>`;
+            selEsc.value = valEsc;
 
-            const selectCurso = document.getElementById("config-select-curso");
-            selectCurso.innerHTML = '<option value="">Elegir Curso...</option>';
-            if (valorActual && estructuraDB[valorActual]) {
-                for (let curso in estructuraDB[valorActual]) selectCurso.innerHTML += `<option value="${curso}">${curso}</option>`;
+            const selCur = document.getElementById("config-select-curso");
+            selCur.innerHTML = '<option value="">Elegir...</option>';
+            if (valEsc && estructuraDB[valEsc]) {
+                for (let c in estructuraDB[valEsc]) selCur.innerHTML += `<option value="${c}">${c}</option>`;
             }
             mostrarAlumnosConfig();
         }
 
         function agregarEscuela() {
-            const nombre = document.getElementById("input-nueva-escuela").value.trim().toUpperCase();
-            if (!nombre) return;
-            estructuraDB[nombre] = {}; 
-            guardarEstructura();
+            const n = document.getElementById("input-nueva-escuela").value.trim().toUpperCase();
+            if (!n) return;
+            estructuraDB[n] = {}; 
+            localStorage.setItem('EstructuraEscuelas_Pro_iOS', JSON.stringify(estructuraDB));
             document.getElementById("input-nueva-escuela").value = "";
             actualizarListasConfig();
         }
 
         function agregarCurso() {
-            const escuela = document.getElementById("config-select-escuela").value;
-            const curso = document.getElementById("input-nuevo-curso").value.trim();
-            if (!escuela || !curso) return;
-            estructuraDB[escuela][curso] = []; 
-            guardarEstructura();
+            const e = document.getElementById("config-select-escuela").value;
+            const c = document.getElementById("input-nuevo-curso").value.trim();
+            if (!e || !c) return;
+            estructuraDB[e][c] = []; 
+            localStorage.setItem('EstructuraEscuelas_Pro_iOS', JSON.stringify(estructuraDB));
             document.getElementById("input-nuevo-curso").value = "";
             actualizarListasConfig();
         }
 
         function agregarAlumno() {
-            const escuela = document.getElementById("config-select-escuela").value;
-            const curso = document.getElementById("config-select-curso").value;
-            const alumnoInput = document.getElementById("input-nuevo-alumno");
-            const alumno = alumnoInput.value.trim();
-            if (!escuela || !curso || !alumno) return;
-            estructuraDB[escuela][curso].push(alumno);
-            estructuraDB[escuela][curso].sort(); 
-            guardarEstructura();
-            alumnoInput.value = "";
-            alumnoInput.focus(); 
+            const e = document.getElementById("config-select-escuela").value;
+            const c = document.getElementById("config-select-curso").value;
+            const i = document.getElementById("input-nuevo-alumno");
+            const a = i.value.trim();
+            if (!e || !c || !a) return;
+            estructuraDB[e][c].push(a);
+            estructuraDB[e][c].sort(); 
+            localStorage.setItem('EstructuraEscuelas_Pro_iOS', JSON.stringify(estructuraDB));
+            i.value = ""; i.focus();
             mostrarAlumnosConfig();
         }
 
-        function ingresarConEnter(e) { if (e.key === "Enter") agregarAlumno(); }
-
         function mostrarAlumnosConfig() {
-            const escuela = document.getElementById("config-select-escuela").value;
-            const curso = document.getElementById("config-select-curso").value;
-            const divLista = document.getElementById("lista-config-alumnos");
-            divLista.innerHTML = "";
-            if (escuela && curso && estructuraDB[escuela][curso]) {
-                estructuraDB[escuela][curso].forEach((alumno, index) => {
-                    divLista.innerHTML += `<div class="config-alumno-item">${alumno} <b style="color:red;cursor:pointer" onclick="borrarAlumno('${escuela}','${curso}',${index})">X</b></div>`;
+            const e = document.getElementById("config-select-escuela").value;
+            const c = document.getElementById("config-select-curso").value;
+            const d = document.getElementById("lista-config-alumnos");
+            d.innerHTML = "";
+            if (e && c && estructuraDB[e][c]) {
+                estructuraDB[e][c].forEach((al, idx) => {
+                    d.innerHTML += `<div style="padding:10px; border-bottom:1px solid #eee; display:flex; justify-content:space-between;">${al} <b style="color:red; cursor:pointer;" onclick="borrarAl('${e}','${c}',${idx})">X</b></div>`;
                 });
             }
         }
 
-        function borrarAlumno(e, c, i) {
+        function borrarAl(e, c, i) {
             estructuraDB[e][c].splice(i, 1);
-            guardarEstructura();
+            localStorage.setItem('EstructuraEscuelas_Pro_iOS', JSON.stringify(estructuraDB));
             mostrarAlumnosConfig();
         }
 
-        function guardarEstructura() { localStorage.setItem('EstructuraEscuelas_Pro_iOS', JSON.stringify(estructuraDB)); }
-
-        function borrarTodaLaBase() {
-            if(confirm("¿Borrar todo?")) { estructuraDB = {}; guardarEstructura(); actualizarListasConfig(); }
-        }
-
-        // Lógica Asistencia
-        window.onload = cargarSelectEscuelasPrincipal;
-
         function cargarSelectEscuelasPrincipal() {
-            const selectEscuela = document.getElementById("select-escuela");
-            selectEscuela.innerHTML = '<option value="">Seleccionar...</option>';
-            for (let escuela in estructuraDB) selectEscuela.innerHTML += `<option value="${escuela}">${escuela}</option>`;
+            const s = document.getElementById("select-escuela");
+            s.innerHTML = '<option value="">Elegir Institución...</option>';
+            for (let e in estructuraDB) s.innerHTML += `<option value="${e}">${e}</option>`;
         }
 
         function cargarCursos() {
-            const escuela = document.getElementById("select-escuela").value;
-            const selectCurso = document.getElementById("select-curso");
-            selectCurso.innerHTML = '<option value="">Seleccionar...</option>';
-            if (escuela && estructuraDB[escuela]) {
-                selectCurso.disabled = false;
-                for (let curso in estructuraDB[escuela]) selectCurso.innerHTML += `<option value="${curso}">${curso}</option>`;
-            } else { selectCurso.disabled = true; }
+            const e = document.getElementById("select-escuela").value;
+            const s = document.getElementById("select-curso");
+            s.innerHTML = '<option value="">Elegir Curso...</option>';
+            if (e && estructuraDB[e]) {
+                s.disabled = false;
+                for (let c in estructuraDB[e]) s.innerHTML += `<option value="${c}">${c}</option>`;
+            } else { s.disabled = true; }
         }
 
         function cargarAlumnosAsistencia() {
-            const escuela = document.getElementById("select-escuela").value;
-            const curso = document.getElementById("select-curso").value;
-            const divAlumnos = document.getElementById("lista-alumnos");
-            const btnGuardar = document.getElementById("btn-guardar");
-            divAlumnos.innerHTML = '';
-            if (escuela && curso && estructuraDB[escuela][curso]) {
-                estructuraDB[escuela][curso].forEach((alumno) => {
+            const e = document.getElementById("select-escuela").value;
+            const c = document.getElementById("select-curso").value;
+            const d = document.getElementById("lista-alumnos");
+            const b = document.getElementById("btn-guardar");
+            d.innerHTML = '';
+            if (e && c && estructuraDB[e][c]) {
+                estructuraDB[e][c].forEach(al => {
                     const card = document.createElement("div");
                     card.className = "alumno-card";
-                    card.innerHTML = `
-                        <div class="alumno-nombre">${alumno}</div>
+                    card.innerHTML = `<div class="alumno-nombre" style="font-weight:700; margin-bottom:10px;">${al}</div>
                         <div class="botones-estado">
-                            <button class="btn presente activo" onclick="marcarEstado(this)">P</button>
-                            <button class="btn ausente" onclick="marcarEstado(this)">A</button>
-                            <button class="btn tarde" onclick="marcarEstado(this)">T</button>
+                            <button class="btn presente activo" onclick="marcarE(this)">P</button>
+                            <button class="btn ausente" onclick="marcarE(this)">A</button>
+                            <button class="btn tarde" onclick="marcarE(this)">T</button>
                         </div>
-                        <input type="text" placeholder="Observaciones..." class="input-nota">`;
-                    divAlumnos.appendChild(card);
+                        <input type="text" placeholder="Notas..." style="padding:8px; border-radius:8px; border:1px solid #eee; width:100%; box-sizing:border-box;" class="in-nota">`;
+                    d.appendChild(card);
                 });
-                btnGuardar.style.display = 'block';
+                b.style.display = 'block';
             }
         }
 
-        function marcarEstado(boton) {
-            const botones = boton.parentElement.querySelectorAll('.btn');
-            botones.forEach(b => b.classList.remove('activo'));
-            boton.classList.add('activo');
+        function marcarE(bt) {
+            const bts = bt.parentElement.querySelectorAll('.btn');
+            bts.forEach(x => x.classList.remove('activo'));
+            bt.classList.add('activo');
         }
 
         function guardarAsistencia() {
-            const escuela = document.getElementById("select-escuela").value;
-            const curso = document.getElementById("select-curso").value;
-            const tarjetas = document.querySelectorAll('.alumno-card');
-            const fecha = new Date().toLocaleDateString('es-AR');
-            const hora = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
-            let nuevaAsistencia = [];
-            tarjetas.forEach(tarjeta => {
-                const nombre = tarjeta.querySelector('.alumno-nombre').innerText;
-                // Eliges el estado basándote en la clase 'activo' (image_0.png)
-                const estadoActivo = tarjeta.querySelector('.btn.activo').innerText;
-                const estado = estadoActivo === 'P' ? 'Presente' : (estadoActivo === 'T' ? 'Tarde' : 'Ausente');
-                const notas = tarjeta.querySelector('.input-nota').value.replace(/;/g, '');
-                nuevaAsistencia.push({ fecha, hora, escuela, curso, alumno: nombre, estado, notas });
+            const esc = document.getElementById("select-escuela").value;
+            const cur = document.getElementById("select-curso").value;
+            const cards = document.querySelectorAll('.alumno-card');
+            const f = new Date().toLocaleDateString('es-AR');
+            const h = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+            let asis = [];
+            cards.forEach(ca => {
+                const n = ca.querySelector('.alumno-nombre').innerText;
+                const e = ca.querySelector('.btn.activo').innerText === 'P' ? 'Presente' : (ca.querySelector('.btn.activo').innerText === 'T' ? 'Tarde' : 'Ausente');
+                const nt = ca.querySelector('.in-nota').value.replace(/;/g, '');
+                asis.push({ f, h, esc, cur, n, e, nt });
             });
-            let historial = JSON.parse(localStorage.getItem('AsistenciaDB')) || [];
-            localStorage.setItem('AsistenciaDB', JSON.stringify(historial.concat(nuevaAsistencia)));
-            alert("Guardado localmente ✅");
+            let db = JSON.parse(localStorage.getItem('AsistenciaDB')) || [];
+            localStorage.setItem('AsistenciaDB', JSON.stringify(db.concat(asis)));
+            alert("Guardado local ✅");
             document.getElementById("lista-alumnos").innerHTML = "";
             document.getElementById("btn-guardar").style.display = "none";
         }
 
         function descargarExcel() {
-            let historial = JSON.parse(localStorage.getItem('AsistenciaDB')) || [];
-            if (historial.length === 0) return alert("Sin datos");
+            let db = JSON.parse(localStorage.getItem('AsistenciaDB')) || [];
+            if (!db.length) return alert("Sin datos");
             let csv = "Fecha;Hora;Escuela;Curso;Alumno;Estado;Notas\n";
-            historial.forEach(r => csv += `${r.fecha};${r.hora};"${r.escuela}";"${r.curso}";"${r.alumno}";"${r.estado}";"${r.notas}"\n`);
-            let blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csv], { type: 'text/csv;charset=utf-8;' });
-            let link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = `Asistencia_iOS_${new Date().toLocaleDateString('es-AR').replace(/\//g, '-')}.csv`;
-            link.click();
+            db.forEach(r => csv += `${r.f};${r.h};"${r.esc}";"${r.cur}";"${r.n}";"${r.e}";"${r.nt}"\n`);
+            let bl = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csv], { type: 'text/csv;charset=utf-8;' });
+            let l = document.createElement("a");
+            l.href = URL.createObjectURL(bl);
+            l.download = `Asis_${f.replace(/\//g, '-')}.csv`;
+            l.click();
         }
+
+        function borrarTodaLaBase() {
+            if(confirm("¿Borrar todo?")) { estructuraDB = {}; localStorage.setItem('EstructuraEscuelas_Pro_iOS', JSON.stringify(estructuraDB)); actualizarListasConfig(); }
+        }
+
+        window.onload = cargarSelectEscuelasPrincipal;
     </script>
 </body>
 </html>
+
 
 
