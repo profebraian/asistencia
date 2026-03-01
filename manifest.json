@@ -1,0 +1,20 @@
+{
+  "short_name": "Asistencia",
+  "name": "Sistema de Asistencia Docente Pro",
+  "icons": [
+    {
+      "src": "icono.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icono.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#32aded",
+  "background_color": "#ffffff"
+}
